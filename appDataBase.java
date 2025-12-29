@@ -6,6 +6,8 @@ public class appDataBase {
 
         // Diseases
 
+        ArrayList<ArrayList<String>> diseases = new ArrayList<ArrayList<String>>();
+
         ArrayList<String> Alzheimers = new ArrayList<String>();
         Alzheimers.add("Benzgalantamine");
         Alzheimers.add("Donepezil");
@@ -215,9 +217,27 @@ public class appDataBase {
         GlioblastomaTumor.add("Levetiracetam");
         GlioblastomaTumor.add("Phenytoin");
 
+        diseases.add(Alzheimers);
+        diseases.add(VascularDementia);
+        diseases.add(Schizophrenia);
+        diseases.add(Epilepsy);
+        diseases.add(Parkinsons);
+        diseases.add(LewyBodyDementia);
+        diseases.add(MultipleSclerosis);
+        diseases.add(PersonalityDisorder);
+        diseases.add(FrontotemporalDementia);
+        diseases.add(Huntingtons);
+        diseases.add(WernickeKorsakoffSyndrome);
+        diseases.add(PosteriorCorticalAtrophy);
+        diseases.add(MeningiomaTumor);
+        diseases.add(MetastaticTumor);
+        diseases.add(GlioblastomaTumor);
+
 
 
         // Medicines
+
+        ArrayList<ArrayList<String>> medications = new ArrayList<ArrayList<String>>();
 
         ArrayList<String> Aggrenox = new ArrayList<String>();
         Aggrenox.add("Benzgalantamine");
@@ -2510,6 +2530,83 @@ public class appDataBase {
         Zonisamide.add("Venlafaxine");
         Zonisamide.add("Vilazodone");
         Zonisamide.add("Ziprasidone");
+
+        medications.add(Aggrenox);
+        medications.add(Alprazolam);
+        medications.add(Amantadine);
+        medications.add(Ampyra);
+        medications.add(Aripiprazole);
+        medications.add(Aspirin);
+        medications.add(Baclofen);
+        medications.add(Bevacizumab);
+        medications.add(Benzgalantamine);
+        medications.add(Botox);
+        medications.add(Brexpiprazole);
+        medications.add(Bupropion);
+        medications.add(Carbamazepine);
+        medications.add(CarbidopaLevodopa);
+        medications.add(Carmustine);
+        medications.add(Citalopram);
+        medications.add(Clobazam);
+        medications.add(Clonazepam);
+        medications.add(Clopidogrel);
+        medications.add(Clozapine);
+        medications.add(Dantrolene);
+        medications.add(Dexamethasone);
+        medications.add(Deutetrabenazine);
+        medications.add(Diazepam);
+        medications.add(Divalproex);
+        medications.add(Donepezil);
+        medications.add(Namzaric);
+        medications.add(Donanemab);
+        medications.add(Duloxetine);
+        medications.add(Escitalopram);
+        medications.add(Fluoxetine);
+        medications.add(Fluvoxamine);
+        medications.add(Gabapentin);
+        medications.add(Galantamine);
+        medications.add(Haloperidol);
+        medications.add(Hydroxyurea);
+        medications.add(Ipilimumab);
+        medications.add(Lacosamide);
+        medications.add(Lamotrigine);
+        medications.add(Levetiracetam);
+        medications.add(Levodopa);
+        medications.add(Lecanemab);
+        medications.add(Lithium);
+        medications.add(Lomustine);
+        medications.add(Lorazepam);
+        medications.add(Memantine);
+        medications.add(Methylphenidate);
+        medications.add(Mifepristone);
+        medications.add(Modafinil);
+        medications.add(Myrbetriq);
+        medications.add(Nivolumab);
+        medications.add(Olanzapine);
+        medications.add(Oxybutynin);
+        medications.add(Paroxetine);
+        medications.add(Pembrolizumab);
+        medications.add(Perphenazine);
+        medications.add(Phenytoin);
+        medications.add(Pimavanserin);
+        medications.add(Prednisone);
+        medications.add(Pregabalin);
+        medications.add(Procarbazine);
+        medications.add(Quetiapine);
+        medications.add(Risperidone);
+        medications.add(Rivastigmine);
+        medications.add(Sandostatin);
+        medications.add(Sertraline);
+        medications.add(Temozolomide);
+        medications.add(Tetrabenazine);
+        medications.add(Topiramate);
+        medications.add(Trazodone);
+        medications.add(Valbenazine);
+        medications.add(Venlafaxine);
+        medications.add(Vilazodone);
+        medications.add(Vincristine);
+        medications.add(Ziprasidone);
+        medications.add(Zonisamide);
 
     }
 }
