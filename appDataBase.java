@@ -3,11 +3,14 @@ import java.util.Scanner;
 
 public class appDataBase {
 
+    public ArrayList<ArrayList<String>> diseases = new ArrayList<>();
+    public ArrayList<String> diseaseNames = new ArrayList<>();
+    public ArrayList<ArrayList<String>> medications = new ArrayList<>();
+    public ArrayList<String> medicationNames = new ArrayList<>();
+
     public appDataBase() {
 
         // Diseases
-
-        ArrayList<ArrayList<String>> diseases = new ArrayList<ArrayList<String>>();
 
         ArrayList<String> Alzheimers = new ArrayList<String>();
         Alzheimers.add("Benzgalantamine");
@@ -218,7 +221,22 @@ public class appDataBase {
         GlioblastomaTumor.add("Levetiracetam");
         GlioblastomaTumor.add("Phenytoin");
 
-        ArrayList<String> diseaseNames = new ArrayList<>();
+        diseases.add(Alzheimers);
+        diseases.add(VascularDementia);
+        diseases.add(Schizophrenia);
+        diseases.add(Epilepsy);
+        diseases.add(Parkinsons);
+        diseases.add(LewyBodyDementia);
+        diseases.add(MultipleSclerosis);
+        diseases.add(PersonalityDisorder);
+        diseases.add(FrontotemporalDementia);
+        diseases.add(Huntingtons);
+        diseases.add(WernickeKorsakoffSyndrome);
+        diseases.add(PosteriorCorticalAtrophy);
+        diseases.add(MeningiomaTumor);
+        diseases.add(MetastaticTumor);
+        diseases.add(GlioblastomaTumor);
+
         diseaseNames.add("Alzheimers");
         diseaseNames.add("VascularDementia");
         diseaseNames.add("Schizophrenia");
@@ -238,8 +256,6 @@ public class appDataBase {
 
 
         // Medicines
-
-        ArrayList<ArrayList<String>> medications = new ArrayList<ArrayList<String>>();
 
         ArrayList<String> Aggrenox = new ArrayList<String>();
         Aggrenox.add("Benzgalantamine");
@@ -2610,7 +2626,6 @@ public class appDataBase {
         medications.add(Ziprasidone);
         medications.add(Zonisamide);
 
-        ArrayList<String> medicationNames = new ArrayList<>();
         medicationNames.add("Aggrenox");
         medicationNames.add("Alprazolam");
         medicationNames.add("Amantadine");
@@ -2687,63 +2702,70 @@ public class appDataBase {
         medicationNames.add("Vincristine");
         medicationNames.add("Ziprasidone");
         medicationNames.add("Zonisamide");
+    }
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter disease(s) OR medications: ");
-        String search = scanner.nextLine();
-        ArrayList<String> results = displayResults(search);
-        ArrayList<String> interactions = new ArrayList<String>();
-        ArrayList<String> uniqueInteractions = new ArrayList<String>();
-        if (results.isEmpty()) {
-            System.out.println("No results found.");
-            return;
-        } else {
-            for (int i = 0; i < diseases.size(); i++) {
-                if (results.contains(diseaseNames.get(i))) {
-                    System.out.println("Medications available:");
-                    for (int j = 0; j < diseases.get(i).size(); j++) {
-                        System.out.println(diseases.get(i).get(j));
-                    }
-                }
-            }
-            for (int i = 0; i < medications.size(); i++) {
-                if (results.contains(medicationNames.get(i))) {
-                    for (int j = 0; j < medications.get(i).size(); j++) {
-                        if (results.contains(medications.get(i).get(j))) {
-                            interactions.add(medicationNames.get(i) + " interacts with " + medications.get(i).get(j));
+        public static void main(String[] args) {
+            appDataBase db = new appDataBase();
+            db.runApp();
+        }
+
+        public void runApp() {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter disease(s) OR medications: ");
+            String search = scanner.nextLine();
+            ArrayList<String> results = displayResults(search);
+            ArrayList<String> interactions = new ArrayList<String>();
+            ArrayList<String> uniqueInteractions = new ArrayList<String>();
+            if (results.isEmpty()) {
+                System.out.println("No results found.");
+                return;
+            } else {
+                for (int i = 0; i < diseases.size(); i++) {
+                    if (results.contains(diseaseNames.get(i))) {
+                        System.out.println("Medications available:");
+                        for (int j = 0; j < diseases.get(i).size(); j++) {
+                            System.out.println(diseases.get(i).get(j));
                         }
                     }
                 }
-            }
-            for (int i = 0; i < interactions.size(); i++) {
-                String current = interactions.get(i);
-                String[] parts = current.split(" interacts with ");
-                String med1 = parts[0];
-                String med2 = parts[1];
-                String reversed = med2 + " interacts with " + med1;
-                if (!uniqueInteractions.contains(current) && !uniqueInteractions.contains(reversed)) {
-                    uniqueInteractions.add(current);
+                for (int i = 0; i < medications.size(); i++) {
+                    if (results.contains(medicationNames.get(i))) {
+                        for (int j = 0; j < medications.get(i).size(); j++) {
+                            if (results.contains(medications.get(i).get(j))) {
+                                interactions.add(medicationNames.get(i) + " interacts with " + medications.get(i).get(j));
+                            }
+                        }
+                    }
+                }
+                for (int i = 0; i < interactions.size(); i++) {
+                    String current = interactions.get(i);
+                    String[] parts = current.split(" interacts with ");
+                    String med1 = parts[0];
+                    String med2 = parts[1];
+                    String reversed = med2 + " interacts with " + med1;
+                    if (!uniqueInteractions.contains(current) && !uniqueInteractions.contains(reversed)) {
+                        uniqueInteractions.add(current);
+                    }
+                }
+                interactions = uniqueInteractions;
+                for (int i = 0; i < interactions.size(); i++) {
+                    System.out.println(interactions.get(i));
                 }
             }
-            interactions = uniqueInteractions;
-            for (int i = 0; i < interactions.size(); i++) {
-                System.out.println(interactions.get(i));
-            }
         }
-    }
 
-    public ArrayList<String> displayResults(String search) {
-        String input = search;
-        ArrayList<String> results = new ArrayList<String>();
-        for (int i = input.length() - 1; i >= 0; i--) {
-            int count = input.length();
-            if (input.charAt(i) == ' ') {
-                results.add(input.substring(i, count));
-                count = i;
-            } else if (i == 0) {
-                results.add(input.substring(i, count));
+        public ArrayList<String> displayResults(String search) {
+            String input = search;
+            ArrayList<String> results = new ArrayList<String>();
+            for (int i = input.length() - 1; i >= 0; i--) {
+                int count = input.length();
+                if (input.charAt(i) == ' ') {
+                    results.add(input.substring(i, count));
+                    count = i;
+                } else if (i == 0) {
+                    results.add(input.substring(i, count));
+                }
             }
+            return results;
         }
-        return results;
-    }
 }
