@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class appDataBase {
 
@@ -217,21 +218,22 @@ public class appDataBase {
         GlioblastomaTumor.add("Levetiracetam");
         GlioblastomaTumor.add("Phenytoin");
 
-        diseases.add(Alzheimers);
-        diseases.add(VascularDementia);
-        diseases.add(Schizophrenia);
-        diseases.add(Epilepsy);
-        diseases.add(Parkinsons);
-        diseases.add(LewyBodyDementia);
-        diseases.add(MultipleSclerosis);
-        diseases.add(PersonalityDisorder);
-        diseases.add(FrontotemporalDementia);
-        diseases.add(Huntingtons);
-        diseases.add(WernickeKorsakoffSyndrome);
-        diseases.add(PosteriorCorticalAtrophy);
-        diseases.add(MeningiomaTumor);
-        diseases.add(MetastaticTumor);
-        diseases.add(GlioblastomaTumor);
+        ArrayList<String> diseaseNames = new ArrayList<>();
+        diseaseNames.add("Alzheimers");
+        diseaseNames.add("VascularDementia");
+        diseaseNames.add("Schizophrenia");
+        diseaseNames.add("Epilepsy");
+        diseaseNames.add("Parkinsons");
+        diseaseNames.add("LewyBodyDementia");
+        diseaseNames.add("MultipleSclerosis");
+        diseaseNames.add("PersonalityDisorder");
+        diseaseNames.add("FrontotemporalDementia");
+        diseaseNames.add("Huntingtons");
+        diseaseNames.add("WernickeKorsakoffSyndrome");
+        diseaseNames.add("PosteriorCorticalAtrophy");
+        diseaseNames.add("MeningiomaTumor");
+        diseaseNames.add("MetastaticTumor");
+        diseaseNames.add("GlioblastomaTumor");
 
 
 
@@ -2608,5 +2610,140 @@ public class appDataBase {
         medications.add(Ziprasidone);
         medications.add(Zonisamide);
 
+        ArrayList<String> medicationNames = new ArrayList<>();
+        medicationNames.add("Aggrenox");
+        medicationNames.add("Alprazolam");
+        medicationNames.add("Amantadine");
+        medicationNames.add("Ampyra");
+        medicationNames.add("Aripiprazole");
+        medicationNames.add("Aspirin");
+        medicationNames.add("Baclofen");
+        medicationNames.add("Bevacizumab");
+        medicationNames.add("Benzgalantamine");
+        medicationNames.add("Botox");
+        medicationNames.add("Brexpiprazole");
+        medicationNames.add("Bupropion");
+        medicationNames.add("Carbamazepine");
+        medicationNames.add("CarbidopaLevodopa");
+        medicationNames.add("Carmustine");
+        medicationNames.add("Citalopram");
+        medicationNames.add("Clobazam");
+        medicationNames.add("Clonazepam");
+        medicationNames.add("Clopidogrel");
+        medicationNames.add("Clozapine");
+        medicationNames.add("Dantrolene");
+        medicationNames.add("Dexamethasone");
+        medicationNames.add("Deutetrabenazine");
+        medicationNames.add("Diazepam");
+        medicationNames.add("Divalproex");
+        medicationNames.add("Donepezil");
+        medicationNames.add("Namzaric");
+        medicationNames.add("Donanemab");
+        medicationNames.add("Duloxetine");
+        medicationNames.add("Escitalopram");
+        medicationNames.add("Fluoxetine");
+        medicationNames.add("Fluvoxamine");
+        medicationNames.add("Gabapentin");
+        medicationNames.add("Galantamine");
+        medicationNames.add("Haloperidol");
+        medicationNames.add("Hydroxyurea");
+        medicationNames.add("Ipilimumab");
+        medicationNames.add("Lacosamide");
+        medicationNames.add("Lamotrigine");
+        medicationNames.add("Levetiracetam");
+        medicationNames.add("Levodopa");
+        medicationNames.add("Lecanemab");
+        medicationNames.add("Lithium");
+        medicationNames.add("Lomustine");
+        medicationNames.add("Lorazepam");
+        medicationNames.add("Memantine");
+        medicationNames.add("Methylphenidate");
+        medicationNames.add("Mifepristone");
+        medicationNames.add("Modafinil");
+        medicationNames.add("Myrbetriq");
+        medicationNames.add("Nivolumab");
+        medicationNames.add("Olanzapine");
+        medicationNames.add("Oxybutynin");
+        medicationNames.add("Paroxetine");
+        medicationNames.add("Pembrolizumab");
+        medicationNames.add("Perphenazine");
+        medicationNames.add("Phenytoin");
+        medicationNames.add("Pimavanserin");
+        medicationNames.add("Prednisone");
+        medicationNames.add("Pregabalin");
+        medicationNames.add("Procarbazine");
+        medicationNames.add("Quetiapine");
+        medicationNames.add("Risperidone");
+        medicationNames.add("Rivastigmine");
+        medicationNames.add("Sandostatin");
+        medicationNames.add("Sertraline");
+        medicationNames.add("Temozolomide");
+        medicationNames.add("Tetrabenazine");
+        medicationNames.add("Topiramate");
+        medicationNames.add("Trazodone");
+        medicationNames.add("Valbenazine");
+        medicationNames.add("Venlafaxine");
+        medicationNames.add("Vilazodone");
+        medicationNames.add("Vincristine");
+        medicationNames.add("Ziprasidone");
+        medicationNames.add("Zonisamide");
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter disease(s) OR medications: ");
+        String search = scanner.nextLine();
+        ArrayList<String> results = displayResults(search);
+        ArrayList<String> interactions = new ArrayList<String>();
+        ArrayList<String> uniqueInteractions = new ArrayList<String>();
+        if (results.isEmpty()) {
+            System.out.println("No results found.");
+            return;
+        } else {
+            for (int i = 0; i < diseases.size(); i++) {
+                if (results.contains(diseaseNames.get(i))) {
+                    System.out.println("Medications available:");
+                    for (int j = 0; j < diseases.get(i).size(); j++) {
+                        System.out.println(diseases.get(i).get(j));
+                    }
+                }
+            }
+            for (int i = 0; i < medications.size(); i++) {
+                if (results.contains(medicationNames.get(i))) {
+                    for (int j = 0; j < medications.get(i).size(); j++) {
+                        if (results.contains(medications.get(i).get(j))) {
+                            interactions.add(medicationNames.get(i) + " interacts with " + medications.get(i).get(j));
+                        }
+                    }
+                }
+            }
+            for (int i = 0; i < interactions.size(); i++) {
+                String current = interactions.get(i);
+                String[] parts = current.split(" interacts with ");
+                String med1 = parts[0];
+                String med2 = parts[1];
+                String reversed = med2 + " interacts with " + med1;
+                if (!uniqueInteractions.contains(current) && !uniqueInteractions.contains(reversed)) {
+                    uniqueInteractions.add(current);
+                }
+            }
+            interactions = uniqueInteractions;
+            for (int i = 0; i < interactions.size(); i++) {
+                System.out.println(interactions.get(i));
+            }
+        }
+    }
+
+    public ArrayList<String> displayResults(String search) {
+        String input = search;
+        ArrayList<String> results = new ArrayList<String>();
+        for (int i = input.length() - 1; i >= 0; i--) {
+            int count = input.length();
+            if (input.charAt(i) == ' ') {
+                results.add(input.substring(i, count));
+                count = i;
+            } else if (i == 0) {
+                results.add(input.substring(i, count));
+            }
+        }
+        return results;
     }
 }
