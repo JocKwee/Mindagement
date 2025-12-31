@@ -72,7 +72,7 @@ public class appDataBase {
         Epilepsy.add("Carbamazepine");
         Epilepsy.add("Lamotrigine");
         Epilepsy.add("Levetiracetam");
-        Epilepsy.add("Valproic Acid");
+        Epilepsy.add("Divalproex");
         Epilepsy.add("Topiramate");
         Epilepsy.add("Oxcarbazepine");
         Epilepsy.add("Zonisamide");
@@ -2716,29 +2716,36 @@ public class appDataBase {
             ArrayList<String> results = displayResults(search);
             ArrayList<String> interactions = new ArrayList<String>();
             ArrayList<String> uniqueInteractions = new ArrayList<String>();
+            ArrayList<String> printedForThisSearch = new ArrayList<>();
+
             if (results.isEmpty()) {
                 System.out.println("No results found.");
                 return;
-            } else {
-                for (int i = 0; i < diseases.size(); i++) {
-                    if (results.contains(diseaseNames.get(i))) {
-                        System.out.println("Medications available:");
-                        for (int j = 0; j < diseases.get(i).size(); j++) {
-                            System.out.println(diseases.get(i).get(j));
+            } 
+            
+            for (int i = 0; i < diseaseNames.size(); i++) {
+                if (results.contains(diseaseNames.get(i))) {                    
+                    for (int j = 0; j < diseases.get(i).size(); j++) {
+                        String attachedMeds = diseases.get(i).get(j);
+                        if (!printedForThisSearch.contains(attachedMeds)) {
+                            System.out.println(attachedMeds);
+                            printedForThisSearch.add(attachedMeds);
+                    }
+                }
+            }
+        }
+
+            for (int a = 0; a < medications.size(); a++) {
+                if (results.contains(medicationNames.get(a))) {
+                    for (int j = 0; j < medications.get(a).size(); j++) {
+                        if (results.contains(medications.get(a).get(j))) {
+                            interactions.add(medicationNames.get(a) + " interacts with " + medications.get(a).get(j));
                         }
                     }
                 }
-                for (int i = 0; i < medications.size(); i++) {
-                    if (results.contains(medicationNames.get(i))) {
-                        for (int j = 0; j < medications.get(i).size(); j++) {
-                            if (results.contains(medications.get(i).get(j))) {
-                                interactions.add(medicationNames.get(i) + " interacts with " + medications.get(i).get(j));
-                            }
-                        }
-                    }
-                }
-                for (int i = 0; i < interactions.size(); i++) {
-                    String current = interactions.get(i);
+            }
+                for (int k = 0; k < interactions.size(); k++) {
+                    String current = interactions.get(k);
                     String[] parts = current.split(" interacts with ");
                     String med1 = parts[0];
                     String med2 = parts[1];
@@ -2747,20 +2754,20 @@ public class appDataBase {
                         uniqueInteractions.add(current);
                     }
                 }
-                interactions = uniqueInteractions;
-                for (int i = 0; i < interactions.size(); i++) {
-                    System.out.println(interactions.get(i));
-                }
+
+            interactions = uniqueInteractions;
+            for (int p = 0; p < interactions.size(); p++) {
+                System.out.println(interactions.get(p));
             }
         }
 
         public ArrayList<String> displayResults(String search) {
             String input = search;
             ArrayList<String> results = new ArrayList<String>();
+            int count = input.length();
             for (int i = input.length() - 1; i >= 0; i--) {
-                int count = input.length();
                 if (input.charAt(i) == ' ') {
-                    results.add(input.substring(i, count));
+                    results.add(input.substring(i + 1, count).trim());
                     count = i;
                 } else if (i == 0) {
                     results.add(input.substring(i, count));
