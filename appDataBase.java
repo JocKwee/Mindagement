@@ -1,12 +1,28 @@
 import java.util.ArrayList;
-import java.util.Scanner;
+// import java.util.Scanner;
+import java.awt.*;             
+import javax.swing.*;
+import javax.swing.*;
 
-public class appDataBase {
+public class appDataBase extends JFrame {
 
     public ArrayList<ArrayList<String>> diseases = new ArrayList<>();
     public ArrayList<String> diseaseNames = new ArrayList<>();
     public ArrayList<ArrayList<String>> medications = new ArrayList<>();
     public ArrayList<String> medicationNames = new ArrayList<>();
+
+    Color darkBlue = new Color(31,50,130);
+    Color lightBlue = new Color(132, 155, 255);
+    Color green = new Color(140, 219, 121);
+    Color purple = new Color(180, 160, 245);
+    Color white = new Color(255, 255, 255);
+
+    CardLayout cl = new CardLayout();
+    JPanel cardPanel = new JPanel(cl);
+    JTextField mainSearchField;
+    JTextArea resultsList;
+    int W = 375;
+    int H = 667;
 
     public appDataBase() {
 
@@ -2702,65 +2718,226 @@ public class appDataBase {
         medicationNames.add("Vincristine");
         medicationNames.add("Ziprasidone");
         medicationNames.add("Zonisamide");
+
+        setTitle("Mindagement");
+        setSize(W, H);
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        cardPanel.add(createHomePage(), "HOME");
+        cardPanel.add(createResultsPage(), "RESULTS");
+
+        add(cardPanel);
+        setVisible(true);
     }
 
         public static void main(String[] args) {
-            appDataBase db = new appDataBase();
-            db.runApp();
+        SwingUtilities.invokeLater(() -> new appDataBase());
+    }
+
+        private void applyConstants(JPanel panel) {
+        panel.setBackground(darkBlue);
+        panel.setLayout(null);
+
+        JPanel banner = new JPanel();
+        banner.setBackground(lightBlue);
+        banner.setBounds(0, H/10, W, H/10);
+        banner.setLayout(new BorderLayout());
+
+        JLabel title = new JLabel("MINDAGEMENT", SwingConstants.CENTER);
+        title.setForeground(Color.WHITE);
+        title.setFont(new Font("Monospaced", Font.BOLD, 50)); // Size 50 as requested
+        banner.add(title);
+        
+        panel.add(banner);
+    }
+
+    private JPanel createHomePage() {
+        JPanel panel = new JPanel();
+        applyConstants(panel);
+
+        JPanel whiteBox = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                g.setColor(new Color(255, 255, 255, 153)); // 60% White
+                g.fillRect(0, 0, getWidth(), getHeight());
+                super.paintComponent(g);
+            }
+        };
+        whiteBox.setOpaque(false);
+        whiteBox.setBorder(BorderFactory.createLineBorder(purple, 2));
+        whiteBox.setBounds(W/10, (H/10 * 2) + H/10, W - (2*W/10), H/4);
+        whiteBox.setLayout(null);
+
+        JLabel prompt = new JLabel("<html>Enter full name of disease(s)<br>or medications:</html>");
+        prompt.setFont(new Font("Consolas", Font.PLAIN, 18)); 
+        prompt.setForeground(Color.WHITE);
+        prompt.setBounds(10, 10, 250, 60);
+        whiteBox.add(prompt);
+
+        mainSearchField = new JTextField();
+        mainSearchField.setBackground(purple);
+        mainSearchField.setForeground(Color.WHITE);
+        mainSearchField.setFont(new Font("Consolas", Font.PLAIN, 18));
+        mainSearchField.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
+        mainSearchField.setBounds(20, H/8 + 10, whiteBox.getWidth() - 40, 35);
+        mainSearchField.addActionListener(e -> handleSearch(mainSearchField.getText()));
+        whiteBox.add(mainSearchField);
+
+        // Buttons
+        JButton howTo = createStyledButton("How to use Mindagement", green, W/10, H/2 + H/10, W - (2*W/10), 60);
+        JButton qa = createStyledButton("<html>Request<br>Q&A form</html>", lightBlue, W/10, (int)(H*0.75), W/3, 70);
+        JButton mission = createStyledButton("<html>Our<br>Mission</html>", lightBlue, W - W/10 - W/3, (int)(H*0.75), W/3, 70);
+
+        panel.add(whiteBox);
+        panel.add(howTo);
+        panel.add(qa);
+        panel.add(mission);
+        return panel;
+    }
+
+private JPanel createResultsPage() {
+    JPanel panel = new JPanel();
+    applyConstants(panel);
+
+    // 1. THE SEARCH CONTAINER
+    JPanel whiteBox = new JPanel() {
+        @Override
+        protected void paintComponent(Graphics g) {
+            g.setColor(new Color(255, 255, 255, 153)); 
+            g.fillRect(0, 0, getWidth(), getHeight());
+            super.paintComponent(g);
+        }
+    };
+    whiteBox.setOpaque(false);
+    whiteBox.setBorder(BorderFactory.createLineBorder(purple, 2));
+    whiteBox.setBounds(W/10, (H/10 * 2) + H/10, W - (2*W/10), H/4); 
+    whiteBox.setLayout(null);
+
+    JLabel prompt = new JLabel("<html>Enter full name of disease(s)<br>or medications:</html>");
+    prompt.setFont(new Font("Consolas", Font.PLAIN, 18));
+    prompt.setForeground(Color.WHITE);
+    prompt.setBounds(10, 5, whiteBox.getWidth() - 20, 60);
+    whiteBox.add(prompt);
+
+    JTextField resultsSearchField = new JTextField();
+    resultsSearchField.setBackground(purple);
+    resultsSearchField.setForeground(Color.WHITE);
+    resultsSearchField.setFont(new Font("Consolas", Font.PLAIN, 18));
+    resultsSearchField.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
+    resultsSearchField.setBounds(20, H/8 + 10, whiteBox.getWidth() - 40, 35);
+    
+    resultsSearchField.addActionListener(e -> handleSearch(resultsSearchField.getText()));
+    whiteBox.add(resultsSearchField);
+    panel.add(whiteBox);
+
+    // 2. "SEARCH RESULTS" TEXT
+    JLabel resHeader = new JLabel("Search Results", SwingConstants.CENTER);
+    resHeader.setFont(new Font("Consolas", Font.PLAIN, 18));
+    resHeader.setForeground(Color.WHITE);
+    resHeader.setBounds(0, whiteBox.getY() + whiteBox.getHeight() + H/40, W, 20);
+    panel.add(resHeader);
+
+    // 3. PURPLE SCROLL BOX
+    resultsList = new JTextArea();
+    resultsList.setBackground(purple);
+    resultsList.setForeground(Color.WHITE);
+    resultsList.setFont(new Font("Consolas", Font.PLAIN, 18));
+    resultsList.setEditable(false);
+    resultsList.setLineWrap(true);
+    resultsList.setOpaque(true);
+
+    JScrollPane scroll = new JScrollPane(resultsList);
+    scroll.setBounds(W/10, resHeader.getY() + 20, W - (2*W/10), H/4);
+    scroll.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+    scroll.getViewport().setBackground(purple);
+    panel.add(scroll);
+
+    // 4. BACK BUTTON
+    JButton back = createStyledButton("Back", green, W/4, scroll.getY() + scroll.getHeight() + H/40, W/2, 45);
+    back.addActionListener(e -> cl.show(cardPanel, "HOME"));
+    panel.add(back);
+
+    return panel;
+}
+
+    // BUTTON STYLING FIX (Handles Opacity) 
+    private JButton createStyledButton(String text, Color bg, int x, int y, int w, int h) {
+        JButton btn = new JButton(text) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                g.setColor(new Color(bg.getRed(), bg.getGreen(), bg.getBlue(), 153));
+                g.fillRect(0, 0, getWidth(), getHeight());
+                super.paintComponent(g);
+            }
+        };
+        btn.setBounds(x, y, w, h);
+        btn.setFont(new Font("Consolas", Font.PLAIN, 18));
+        btn.setForeground(Color.WHITE);
+        btn.setContentAreaFilled(false); 
+        btn.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
+        return btn;
+    }
+
+    // Logic
+    public void handleSearch(String search) {
+        ArrayList<String> results = displayResults(search);
+        ArrayList<String> interactions = new ArrayList<>();
+        ArrayList<String> uniqueInteractions = new ArrayList<>();
+        ArrayList<String> medsFound = new ArrayList<>();
+
+        if (results.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No results found.");
+            return;
         }
 
-        public void runApp() {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Enter disease(s) OR medications: ");
-            String search = scanner.nextLine();
-            ArrayList<String> results = displayResults(search);
-            ArrayList<String> interactions = new ArrayList<String>();
-            ArrayList<String> uniqueInteractions = new ArrayList<String>();
-            ArrayList<String> printedForThisSearch = new ArrayList<>();
+        // Disease medication search
+        for (int i = 0; i < diseaseNames.size(); i++) {
+            if (results.contains(diseaseNames.get(i))) {
+                for (int j = 0; j < diseases.get(i).size(); j++) {
+                    String med = diseases.get(i).get(j);
+                    if (!medsFound.contains(med)) medsFound.add(med);
+                }
+            }
+        }
 
-            if (results.isEmpty()) {
-                System.out.println("No results found.");
-                return;
-            } 
-            
-            for (int i = 0; i < diseaseNames.size(); i++) {
-                if (results.contains(diseaseNames.get(i))) {                    
-                    for (int j = 0; j < diseases.get(i).size(); j++) {
-                        String attachedMeds = diseases.get(i).get(j);
-                        if (!printedForThisSearch.contains(attachedMeds)) {
-                            System.out.println(attachedMeds);
-                            printedForThisSearch.add(attachedMeds);
+        // 2. Interaciton search
+        for (int a = 0; a < medications.size(); a++) {
+            if (results.contains(medicationNames.get(a))) {
+                for (int j = 0; j < medications.get(a).size(); j++) {
+                    if (results.contains(medications.get(a).get(j))) {
+                        interactions.add(medicationNames.get(a) + " interacts with " + medications.get(a).get(j));
                     }
                 }
             }
         }
 
-            for (int a = 0; a < medications.size(); a++) {
-                if (results.contains(medicationNames.get(a))) {
-                    for (int j = 0; j < medications.get(a).size(); j++) {
-                        if (results.contains(medications.get(a).get(j))) {
-                            interactions.add(medicationNames.get(a) + " interacts with " + medications.get(a).get(j));
-                        }
-                    }
-                }
-            }
-                for (int k = 0; k < interactions.size(); k++) {
-                    String current = interactions.get(k);
-                    String[] parts = current.split(" interacts with ");
-                    String med1 = parts[0];
-                    String med2 = parts[1];
-                    String reversed = med2 + " interacts with " + med1;
-                    if (!uniqueInteractions.contains(current) && !uniqueInteractions.contains(reversed)) {
-                        uniqueInteractions.add(current);
-                    }
-                }
-
-            interactions = uniqueInteractions;
-            for (int p = 0; p < interactions.size(); p++) {
-                System.out.println(interactions.get(p));
+        // Unique Interaction Filter
+        for (String current : interactions) {
+            String[] parts = current.split(" interacts with ");
+            String reversed = parts[1] + " interacts with " + parts[0];
+            if (!uniqueInteractions.contains(current) && !uniqueInteractions.contains(reversed)) {
+                uniqueInteractions.add(current);
             }
         }
 
+        // DISPLAY RESULTS
+        StringBuilder output = new StringBuilder();
+        if (!uniqueInteractions.isEmpty()) {
+            for (String s : uniqueInteractions) output.append(" • ").append(s).append("\n");
+        } else if (!medsFound.isEmpty()) {
+            for (String s : medsFound) output.append(" • ").append(s).append("\n");
+        }
+
+        if (output.length() > 0) {
+            resultsList.setText(output.toString());
+            cl.show(cardPanel, "RESULTS");
+        } else {
+            JOptionPane.showMessageDialog(null, "No matches found in database.");
+        }
+    }
+
+        // Splits input string into individual disease/medication names
         public ArrayList<String> displayResults(String search) {
             String input = search;
             ArrayList<String> results = new ArrayList<String>();
