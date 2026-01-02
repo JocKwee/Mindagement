@@ -4,7 +4,6 @@ import javax.swing.*;
 /**
  * Mindagement: An app that provides neurological disease(s)
  * medications and selected drug interactions.
- * @author Jocelyne Kwee - Chemisty Science Fair
  */
 
 public class appDataBase extends JFrame {
