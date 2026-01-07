@@ -32,19 +32,19 @@ public class appDataBase extends JFrame {
 
         // Diseases and their associated medications
 
-        ArrayList<String> Alzheimers = new ArrayList<String>();
-        Alzheimers.add("Benzgalantamine");
-        Alzheimers.add("Donepezil");
-        Alzheimers.add("Namzaric");
-        Alzheimers.add("Galantamine");
-        Alzheimers.add("Rivastigmine");
-        Alzheimers.add("Memantine");
-        Alzheimers.add("Brexpiprazole");
-        Alzheimers.add("Lecanemab");
-        Alzheimers.add("Donanemab");
-        Alzheimers.add("Citalopram");
-        Alzheimers.add("Escitalopram");
-        Alzheimers.add("Sertraline");
+        ArrayList<String> AlzheimersDisease = new ArrayList<String>();
+        AlzheimersDisease.add("Benzgalantamine");
+        AlzheimersDisease.add("Donepezil");
+        AlzheimersDisease.add("Namzaric");
+        AlzheimersDisease.add("Galantamine");
+        AlzheimersDisease.add("Rivastigmine");
+        AlzheimersDisease.add("Memantine");
+        AlzheimersDisease.add("Brexpiprazole");
+        AlzheimersDisease.add("Lecanemab");
+        AlzheimersDisease.add("Donanemab");
+        AlzheimersDisease.add("Citalopram");
+        AlzheimersDisease.add("Escitalopram");
+        AlzheimersDisease.add("Sertraline");
 
         ArrayList<String> VascularDementia = new ArrayList<String>();
         VascularDementia.add("Benzgalantamine");
@@ -104,18 +104,18 @@ public class appDataBase extends JFrame {
         Epilepsy.add("Lacosamide");
         Epilepsy.add("Pregabalin");
 
-        ArrayList<String> Parkinsons = new ArrayList<String>();
-        Parkinsons.add("Benzgalantamine");
-        Parkinsons.add("Donepezil");
-        Parkinsons.add("Namzaric");
-        Parkinsons.add("Galantamine");
-        Parkinsons.add("Rivastigmine");
-        Parkinsons.add("Carbidopa");
-        Parkinsons.add("Levodopa");
-        Parkinsons.add("Citalopram");
-        Parkinsons.add("Escitalopram");
-        Parkinsons.add("Fluoxetine");
-        Parkinsons.add("Sertraline");
+        ArrayList<String> ParkinsonsDisease = new ArrayList<String>();
+        ParkinsonsDisease.add("Benzgalantamine");
+        ParkinsonsDisease.add("Donepezil");
+        ParkinsonsDisease.add("Namzaric");
+        ParkinsonsDisease.add("Galantamine");
+        ParkinsonsDisease.add("Rivastigmine");
+        ParkinsonsDisease.add("Carbidopa");
+        ParkinsonsDisease.add("Levodopa");
+        ParkinsonsDisease.add("Citalopram");
+        ParkinsonsDisease.add("Escitalopram");
+        ParkinsonsDisease.add("Fluoxetine");
+        ParkinsonsDisease.add("Sertraline");
 
         ArrayList<String> LewyBodyDementia = new ArrayList<String>();
         LewyBodyDementia.add("Donepezil");
@@ -176,26 +176,26 @@ public class appDataBase extends JFrame {
         FrontotemporalDementia.add("Methylphenidate");
         FrontotemporalDementia.add("Levodopa");
 
-        ArrayList<String> Huntingtons = new ArrayList<String>();
-        Huntingtons.add("Tetrabenazine");
-        Huntingtons.add("Deutetrabenazine");
-        Huntingtons.add("Valbenazine");
-        Huntingtons.add("Haloperidol");
-        Huntingtons.add("Olanzapine");
-        Huntingtons.add("Risperidone");
-        Huntingtons.add("Amantadine");
-        Huntingtons.add("Sertraline");
-        Huntingtons.add("Citalopram");
-        Huntingtons.add("Paroxetine");
-        Huntingtons.add("Clonazepam");
-        Huntingtons.add("Diazepam");
-        Huntingtons.add("Trazodone");
-        Huntingtons.add("Aripiprazole");
-        Huntingtons.add("Olanzapine");
-        Huntingtons.add("Haloperidol");
-        Huntingtons.add("Divalproex");
-        Huntingtons.add("Carbamazepine");
-        Huntingtons.add("Lamotrigine");
+        ArrayList<String> HuntingtonsDisease = new ArrayList<String>();
+        HuntingtonsDisease.add("Tetrabenazine");
+        HuntingtonsDisease.add("Deutetrabenazine");
+        HuntingtonsDisease.add("Valbenazine");
+        HuntingtonsDisease.add("Haloperidol");
+        HuntingtonsDisease.add("Olanzapine");
+        HuntingtonsDisease.add("Risperidone");
+        HuntingtonsDisease.add("Amantadine");
+        HuntingtonsDisease.add("Sertraline");
+        HuntingtonsDisease.add("Citalopram");
+        HuntingtonsDisease.add("Paroxetine");
+        HuntingtonsDisease.add("Clonazepam");
+        HuntingtonsDisease.add("Diazepam");
+        HuntingtonsDisease.add("Trazodone");
+        HuntingtonsDisease.add("Aripiprazole");
+        HuntingtonsDisease.add("Olanzapine");
+        HuntingtonsDisease.add("Haloperidol");
+        HuntingtonsDisease.add("Divalproex");
+        HuntingtonsDisease.add("Carbamazepine");
+        HuntingtonsDisease.add("Lamotrigine");
 
         ArrayList<String> WernickeKorsakoffSyndrome = new ArrayList<String>();
         WernickeKorsakoffSyndrome.add("Thiamine");
@@ -242,16 +242,16 @@ public class appDataBase extends JFrame {
         GlioblastomaTumor.add("Phenytoin");
 
         // Stores disease data in ArrayLists above
-        diseases.add(Alzheimers);
+        diseases.add(AlzheimersDisease);
         diseases.add(VascularDementia);
         diseases.add(Schizophrenia);
         diseases.add(Epilepsy);
-        diseases.add(Parkinsons);
+        diseases.add(ParkinsonsDisease);
         diseases.add(LewyBodyDementia);
         diseases.add(MultipleSclerosis);
         diseases.add(PersonalityDisorder);
         diseases.add(FrontotemporalDementia);
-        diseases.add(Huntingtons);
+        diseases.add(HuntingtonsDisease);
         diseases.add(WernickeKorsakoffSyndrome);
         diseases.add(PosteriorCorticalAtrophy);
         diseases.add(MeningiomaTumor);
@@ -259,16 +259,16 @@ public class appDataBase extends JFrame {
         diseases.add(GlioblastomaTumor);
 
         // Stores disease names in ArrayList above (parallel to diseases ArrayList)
-        diseaseNames.add("Alzheimers");
+        diseaseNames.add("AlzheimersDisease");
         diseaseNames.add("VascularDementia");
         diseaseNames.add("Schizophrenia");
         diseaseNames.add("Epilepsy");
-        diseaseNames.add("Parkinsons");
+        diseaseNames.add("ParkinsonsDisease");
         diseaseNames.add("LewyBodyDementia");
         diseaseNames.add("MultipleSclerosis");
         diseaseNames.add("PersonalityDisorder");
         diseaseNames.add("FrontotemporalDementia");
-        diseaseNames.add("Huntingtons");
+        diseaseNames.add("HuntingtonsDisease");
         diseaseNames.add("WernickeKorsakoffSyndrome");
         diseaseNames.add("PosteriorCorticalAtrophy");
         diseaseNames.add("MeningiomaTumor");
